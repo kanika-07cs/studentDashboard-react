@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "../styles/faculty.css";
 
 const FacultyDashboard = () => {
-  const [selectedSection, setSelectedSection] = useState("information"); // Default section is 'information'
+  const [selectedSection, setSelectedSection] = useState("information"); 
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    navigate("/");
+  };
 
   const facultyData = {
     completedWorkload: 20,
@@ -23,7 +29,11 @@ const FacultyDashboard = () => {
 
   return (
     <div className="dashboard-container">
-      {/* Sidebar */}
+
+      <button className="logout-button" onClick={handleLogout}>
+        Logout
+      </button>
+
       <div className="sidebar">
         <h3>Dashboard</h3>
         <ul>
@@ -33,7 +43,6 @@ const FacultyDashboard = () => {
         </ul>
       </div>
 
-      {/* Main Content */}
       <div className="main-content">
       <h2>Faculty Dashboard</h2>
         {selectedSection === "information" && (
@@ -55,10 +64,9 @@ const FacultyDashboard = () => {
           </div>
         )}
 
-        {/* Student Query Section */}
         {selectedSection === "studentQuery" && (
           <div className="dashboard-box">
-            <h3>Student Queries</h3>
+            <h3>Questions posted by Students</h3>
             <ul>
               <li><strong>Total Questions</strong> {facultyData.questions.total}</li>
               <li><strong>Answered Questions</strong> {facultyData.questions.answered}</li>
@@ -75,7 +83,6 @@ const FacultyDashboard = () => {
           </div>
         )}
 
-        {/* Status Section */}
         {selectedSection === "status" && (
           <div className="dashboard-box">
             <h3>Workload, Blogs & Journals</h3>

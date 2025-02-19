@@ -3,7 +3,10 @@ export default function CardWrapper({ children }) {
     return (
       <div
         style={{
-          maxWidth: "400px",
+          display:"flex",
+          justifyContent:"center",
+          alignItems:"center",
+          maxWidth: "350px",
           margin: "auto",
           padding: "20px",
           backgroundColor: "#ecf0f1",

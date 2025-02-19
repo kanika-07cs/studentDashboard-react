@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "../styles/student.css";
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
@@ -7,6 +8,11 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 const StudentDashboard = () => {
   const [activeSection, setActiveSection] = useState("performance");
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    navigate("/");
+  };
 
   const studentData = {
     levelsCompleted: 8,
@@ -48,7 +54,11 @@ const StudentDashboard = () => {
 
   return (
     <div className="dashboard-container">
-      {/* Sidebar */}
+
+      <button className="logout-button" onClick={handleLogout}>
+        Logout
+      </button>
+
       <div className="sidebar">
         <h3>Dashboard</h3>
         <ul>
@@ -58,11 +68,9 @@ const StudentDashboard = () => {
         </ul>
       </div>
 
-      {/* Main Content */}
       <div className="main-content">
         <h2>Student Dashboard</h2>
 
-        {/* Performance Section */}
         {activeSection === "performance" && (
           <div className="dashboard-box">
             <h3>Successful Resolution</h3>
@@ -74,7 +82,6 @@ const StudentDashboard = () => {
           </div>
         )}
 
-        {/* Courses Section */}
         {activeSection === "courses" && (
           <div className="dashboard-box">
             <h3>Courses Studying</h3>
@@ -86,7 +93,6 @@ const StudentDashboard = () => {
           </div>
         )}
 
-        {/* Marks Section */}
         {activeSection === "marks" && (
           <div className="dashboard-box">
             <h3>Marks</h3>

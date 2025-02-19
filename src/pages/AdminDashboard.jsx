@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Pie } from 'react-chartjs-2';
 import "../styles/admin.css";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from 'chart.js';
@@ -6,7 +7,12 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from 'chart.js';
 ChartJS.register(ArcElement, Tooltip, Legend, Title);
 
 const AdminDashboard = () => {
-  const [newEvent, setNewEvent] = useState(""); // Removed EventContext
+  const [newEvent, setNewEvent] = useState(""); 
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    navigate("/");
+  };
   const [dashboardData, setDashboardData] = useState({
     students: {
       online: 60,
@@ -68,13 +74,16 @@ const AdminDashboard = () => {
   };
 
   const handleSaveEvent = () => {
-    // Now just locally saves the event in the state (no external context)
     alert(`Event saved: ${newEvent}`);
   };
 
   return (
     <div className="dashboard-container">
-      {/* Sidebar */}
+
+      <button className="logout-button" onClick={handleLogout}>
+        Logout
+      </button>
+    
       <div className="sidebar">
         <h3>Admin Dashboard</h3>
         <ul>
@@ -84,11 +93,10 @@ const AdminDashboard = () => {
         </ul>
       </div>
 
-      {/* Main Content */}
       <div className="main-content">
         <h2>Admin Dashboard</h2>
 
-        {/* Event Section */}
+        {activeSection === "overview" && (
         <div className="dashboard-box">
           <h3>Event</h3>
           <textarea
@@ -98,8 +106,8 @@ const AdminDashboard = () => {
           ></textarea>
           <button onClick={handleSaveEvent}>Save Event</button>
         </div>
+        )}
 
-        {/* Display Content Based on Active Section */}
         {activeSection === "overview" && (
           <div className="overview">
             <div className="chart-wrapper">

@@ -8,6 +8,23 @@ body {
     height: 100vh;
 }
 
+.logout-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #ed4a4a;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 30px;
+  }
+  
+  .logout-button:hover {
+    background-color: #f70b0bef;
+  }
+
 /* Dashboard Container */
 .dashboard-container {
     display: flex;
